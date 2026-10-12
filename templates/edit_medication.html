@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Επεξεργασία υπενθύμισης · CHRYSPHARMACY{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">ΠΡΟΓΡΑΜΜΑ ΛΗΨΗΣ</div><h1>Επεξεργασία υπενθύμισης</h1><p>{{ reminder.medication_name }} · {{ reminder.remind_at.strftime('%H:%M') }}</p></div><a href="{{ url_for('admin_client_medications',client_id=reminder.client_id) if admin else url_for('client_medications') }}" class="btn btn-outline-secondary">← Επιστροφή</a></div>
+<section class="surface"><div class="surface-head"><div><div class="eyebrow">ΑΛΛΑΓΗ ΡΥΘΜΙΣΕΩΝ</div><h2>Ώρα, κανάλια και περίοδος</h2></div></div><div class="surface-body">{% include '_medication_form.html' %}</div></section>
+{% endblock %}

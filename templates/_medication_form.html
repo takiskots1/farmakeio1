@@ -1,0 +1,23 @@
+<form method="post" novalidate>
+  {{ form.hidden_tag() }}
+  <div class="row g-3">
+    <div class="col-md-7"><label class="form-label" for="{{ form.medication_name.id }}">{{ form.medication_name.label.text }}</label>{{ form.medication_name(class_='form-control',placeholder='Όπως αναγράφεται στο πρόγραμμα θεραπείας',autocomplete='off') }}</div>
+    <div class="col-md-5"><label class="form-label" for="{{ form.remind_at.id }}">{{ form.remind_at.label.text }}</label>{{ form.remind_at(class_='form-control') }}</div>
+    <div class="col-12"><label class="form-label" for="{{ form.instructions.id }}">{{ form.instructions.label.text }}</label>{{ form.instructions(class_='form-control',placeholder='Π.χ. οδηγίες λήψης από τον θεράποντα (προαιρετικό)') }}</div>
+    <div class="col-md-6"><label class="form-label" for="{{ form.start_date.id }}">{{ form.start_date.label.text }}</label>{{ form.start_date(class_='form-control') }}</div>
+    <div class="col-md-6"><label class="form-label" for="{{ form.end_date.id }}">{{ form.end_date.label.text }}</label>{{ form.end_date(class_='form-control') }}</div>
+    <div class="col-12">
+      <label class="form-label fw-semibold">Κανάλια ειδοποίησης (ένα ή περισσότερα)</label>
+      <div class="channel-grid">
+        <label class="channel-option"><span class="channel-icon">▣</span><span class="channel-copy"><strong>Μήνυμα στην καρτέλα</strong><small>Εμφανίζεται όταν συνδεθεί ο πελάτης</small></span>{{ form.channel_portal(class_='form-check-input') }}</label>
+        <label class="channel-option"><span class="channel-icon sms">✉</span><span class="channel-copy"><strong>SMS.to</strong><small>Απαιτεί συναίνεση και ενεργό SMS.to · πιθανή χρέωση</small></span>{{ form.channel_sms(class_='form-check-input') }}</label>
+        <label class="channel-option mail"> <span class="channel-icon mail">@</span><span class="channel-copy"><strong>Email</strong><small>Απαιτεί έγκυρο email, συναίνεση και SMTP</small></span>{{ form.channel_email(class_='form-check-input') }}</label>
+        <label class="channel-option"><span class="channel-icon push">◉</span><span class="channel-copy"><strong>Push notification</strong><small>Απαιτεί HTTPS και εγγεγραμμένη συσκευή</small></span>{{ form.channel_push(class_='form-check-input') }}</label>
+      </div>
+    </div>
+    <div class="col-12"><label class="form-check d-flex gap-2 align-items-center">{{ form.enabled(class_='form-check-input') }} <span>{{ form.enabled.label.text }}</span></label></div>
+  </div>
+  {% for field in form %}{% if field.errors %}<div class="text-danger small mt-2">{{ field.label.text }}: {{ field.errors|join(' · ') }}</div>{% endif %}{% endfor %}
+  <button type="submit" class="btn btn-brand mt-4 w-100">◷ &nbsp; {{ form.submit.label.text }}</button>
+  <p class="hint mt-3 mb-0">Το φαρμακείο και ο πελάτης πρέπει να συμφωνούν με το πρόγραμμα θεραπείας. Το σύστημα υπενθυμίζει, αλλά δεν επιβεβαιώνει τη λήψη και δεν αντικαθιστά ιατρικές οδηγίες.</p>
+</form>
